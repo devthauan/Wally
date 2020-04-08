@@ -1,9 +1,14 @@
+if(gu == 123){
+    mf2
+}else{
+    mt2
+}
+
 GU
 CM123
-NE4
-FN2
-LO123
-CM123
-NE8
-VD3
-LL4
+NE
+MF2
+JM
+FE$
+MT2
+FN$

@@ -1,5 +1,4 @@
 window.androidObj = function AndroidClass(){};
-
 Blockly.Blocks['move_frente'] = {
   init: function() {
     this.appendValueInput("NAME")
@@ -197,9 +196,11 @@ Blockly.Blocks['block_if_else'] = {
     this.appendStatementInput("faca1")
         .setCheck(null)
         .appendField("faça");
+    this.appendDummyInput()
+        .appendField("senão");
     this.appendStatementInput("faca2")
         .setCheck(null)
-        .appendField("senão");
+        .appendField("faça");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);

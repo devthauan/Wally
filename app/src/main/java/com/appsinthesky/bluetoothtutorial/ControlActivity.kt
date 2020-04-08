@@ -193,7 +193,7 @@ class ControlActivity: AppCompatActivity() {
             val code = codigo.split("\n")
             Log.d("testo",code.toString())
             for(cod in code) {
-                if(cod != ";"){
+                if(cod != ";" && cod != ""){
                     sendCommand(cod.trim()+"\n")
                     if (cod == "GL"||cod == "GU"||cod == "GT"||cod == "GD"){
                         receiveCommand()

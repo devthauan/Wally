@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html>
 
 <head>
@@ -58,12 +58,15 @@
             <block type="get_umidade"></block>
             <block type="get_distancia"></block>
             <block type="get_temperatura"></block>
-
         </category>
+
+        <category name="Variaveis" colour="330"
+                  custom="VARIABLE"></category>
+
         <category name="Helpers" colour="#a5755b">
+            <block type="block_loop"></block>
             <block type="block_if"></block>
             <block type="block_if_else"></block>
-            <block type="block_loop"></block>
             <block type="block_cond">
                 <field name="comp">EQ</field>
             </block>
@@ -78,14 +81,67 @@
 
     </xml>
     <script>
-
     var workspace = Blockly.inject('blocklyDiv', {media: '../../media', toolbox: document.getElementById('toolbox')})
-        function showCode(){
-        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-        var code = Blockly.JavaScript.workspaceToCode(workspace)
-        window.androidObj.textToAndroid(code);
-        alert(code)
+
+     Array.prototype.last = function () {
+      return this[this.length - 1];
+    };
+    function showCode() {
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.JavaScript.workspaceToCode(workspace)
+      let variables = {}
+      let mem = 19;
+      let arr = code
+        .replace(/(\;)/gi, '')
+        .split("\n")
+        .map((item, index) => {
+          // ADICIONA OS VARIAVEIS EM UMA HASH
+          if (/(var *)/gi.test(item)) {
+            let vav = item.replace('var ', '').replace(/( *)/g, "").split(',')
+            vav.forEach((i, index) => variables[i] = mem - index)
+            return ''
+          }
+          return item.replace(/( *)/g, "")
+        })
+        .filter(item => !(item === ""))
+
+      console.log(arr)
+      console.log(variables)
+      let stack = [];
+      // SUBISTITUI OS NOMES DAS VARIAVEIS PELA POSICAO NA MEMORIA
+      for (let i = 0; i < arr.length; i++) {
+        if (/(^\w*\=)/gi.test(arr[i].replace(/( *)/g, ''))) {
+          arr.splice(i + 1, 0, `ST${variables[arr[i].match(/(^\w*)/gi)]}`)
+          arr[i] = 'LI' + arr[i].replace(/(^\w*\=)/gi, '').replace(/( *)/g, '')
         }
+        if (!(/(mf|mt|ve|vd|fn|bf|bt|gl|gu|gt|gd|ll|ld|cm|ci|jm|ne|je|jl|jg|ge|le|lo|li|st|ad|su|di|mu|ht|je|jl|jg|ge|le)/gi.test(arr[i]))) {
+          arr[i] = 'LD%' + variables[arr[i]].toString().padStart(3, "0")
+        } else if (/(^\w{2}\$)/gi.test(arr[i]) && arr[i] != "FN$") {
+          arr[i] = arr[i].match(/(^\w{2})/gi) + "%" + variables[arr[i].substring(3)].toString().padStart(3, "0")
+        }
+      }
+      // CONFIGURA OS JUMPS
+      for (let i = 0; i < arr.length; i++) {
+        if (/(ne|je|jl|jg|ge|le)/gi.test(arr[i])) {
+          stack.push(i);
+        } else if (arr[i] == "FN$") {
+          arr[stack.last()] = arr[stack.last()].replace("$", "") + i;
+          arr[i] = arr[i].replace("$", "0");
+          stack.pop();
+        } else if (arr[i] == "JM$" && arr[i + 1] != 'FE$') {
+          arr[i] = arr[i].replace("$", stack.last() - 2);
+        } else if (arr[i - 1] == "JM$" && arr[i] == "FE$") {
+          arr[stack.last()] = arr[stack.last()] + i;
+          arr[i] = "FN0"
+          stack.pop();
+          stack.push(i - 1)
+        }
+      }
+      codigo = arr.map((item, index) => item.replace(/(?<=^..)(.*)/g, item => item.padStart(4, "0"))).join(";") + ";HT0000;$"
+      console.log(codigo.toString())
+      window.androidObj.textToAndroid(codigo);
+      alert(codigo)
+    }
     </script>
 </body>
 

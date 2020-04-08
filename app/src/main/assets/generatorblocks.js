@@ -1,291 +1,222 @@
-Blockly.JavaScript['move_frente'] = function(block) {
+function variableToName(value_name) {
+  if (isNaN(parseInt(value_name)) && value_name != '') {
+    value_name = "$"+value_name
+  }
+  return value_name
+}
+
+Blockly.JavaScript['move_frente'] = function (block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `MF${value_name}\n`;
+  var code = `MF${variableToName(value_name)}\n`;
   return code;
 };
 
-Blockly.JavaScript['move_tras'] = function(block) {
+Blockly.JavaScript['move_tras'] = function (block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `MT${value_name}\n`;
+  var code = `MT${variableToName(value_name)}\n`;
   return code;
 };
 
-Blockly.JavaScript['vira_esquerda'] = function(block) {
+Blockly.JavaScript['vira_esquerda'] = function (block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `VE${value_name}\n`;
+  var code = `VE${variableToName(value_name)}\n`;
   return code;
 };
 
-Blockly.JavaScript['vira_direita'] = function(block) {
+Blockly.JavaScript['vira_direita'] = function (block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `VD${value_name}\n`;
+  var code = `VD${variableToName(value_name)}\n`;
   return code;
 };
 
-Blockly.JavaScript['faz_nada'] = function(block) {
+Blockly.JavaScript['faz_nada'] = function (block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `FN${value_name}\n`;
+  var code = `FN${variableToName(value_name)}\n`;
   return code;
 };
 
-Blockly.JavaScript['buzzer_freq'] = function(block) {
+Blockly.JavaScript['buzzer_freq'] = function (block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `BF${value_name}\n`;
+  var code = `BF${variableToName(value_name)}\n`;
   return code;
 };
 
-Blockly.JavaScript['buzzer_toca'] = function(block) {
+Blockly.JavaScript['buzzer_toca'] = function (block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `BT${value_name}\n`;
+  var code = `BT${variableToName(value_name)}\n`;
   return code;
 };
 
-Blockly.JavaScript['get_luminosidade'] = function(block) {
+Blockly.JavaScript['get_luminosidade'] = function (block) {
   // TODO: Assemble JavaScript into code variable.
-  var code = window.androidObj.textToAndroid("GL");
-//  var teste = document.getElementById("teste");
-//  teste.innerText = ["GL "+code];
+  var code = `GL\n`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
-Blockly.JavaScript['get_umidade'] = function(block) {
+Blockly.JavaScript['get_umidade'] = function (block) {
   // TODO: Assemble JavaScript into code variable.
-   var code = window.androidObj.textToAndroid("GU");
-//   var teste = document.getElementById("teste");
-//   teste.innerText = ["GU "+code];
+  var code = `GU\n`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
-Blockly.JavaScript['get_temperatura'] = function(block) {
+Blockly.JavaScript['get_temperatura'] = function (block) {
   // TODO: Assemble JavaScript into code variable.
-   var code = window.androidObj.textToAndroid("GT");
-//   var teste = document.getElementById("teste");
-//   teste.innerText = ["GT "+code];
+  var code = `GT\n`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
-Blockly.JavaScript['get_distancia'] = function(block) {
+Blockly.JavaScript['get_distancia'] = function (block) {
   // TODO: Assemble JavaScript into code variable.
-   var code = window.androidObj.textToAndroid("GD");
-//   var teste = document.getElementById("teste");
-//   teste.innerText = ["GD "+code];
+  var code = `GD\n`;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
-Blockly.JavaScript['led_liga'] = function(block) {
+Blockly.JavaScript['led_liga'] = function (block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `LL${value_name}\n`;
+  var code = `LL${variableToName(value_name)}\n`;
   return code;
 };
 
-Blockly.JavaScript['led_desliga'] = function(block) {
+Blockly.JavaScript['led_desliga'] = function (block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = `LD${value_name}\n`;
+  var code = `LD${variableToName(value_name)}\n`;
   return code;
 };
 
-Blockly.JavaScript['block_if'] = function(block) {
+Blockly.JavaScript['block_if'] = function (block) {
   var value_se = Blockly.JavaScript.valueToCode(block, 'se', Blockly.JavaScript.ORDER_ATOMIC);
   var statements_faca = Blockly.JavaScript.statementToCode(block, 'faca');
-  var comands = value_se.split(',');
-  if(comands[1]== "EQ"){
-    if(parseFloat(comands[0])== parseFloat(comands[2])){
-      return statements_faca.trim()+"\n"
-    }else{
-      return "";
-  }
-  }else if(comands[1]=="NE"){
-    if(parseFloat(comands[0])!= parseFloat(comands[2])){
-      return statements_faca.trim()+"\n"
-    }else{
-        return "";
-    }
-  }else if(comands[1]=="LOW"){
-    if(parseFloat(comands[0])< parseFloat(comands[2])){
-      return statements_faca.trim()+"\n"
-    }else{
-      return "";
-  }
-  }else if(comands[1]=="LOWEQ"){
-    if(parseFloat(comands[0])<= parseFloat(comands[2])){
-      return statements_faca.trim()+"\n"
-    }else{
-      return "";
-  }
-  }else if(comands[1]=="BIG"){
-    if(parseFloat(comands[0]) > parseFloat(comands[2])){
-      return statements_faca.trim()+"\n"
-    }else{
-      return "";
-  }
-  }else if(comands[1]=="BIGEQ"){
-    if(parseFloat(comands[0])>= parseFloat(comands[2])){
-      return statements_faca.trim()+"\n"
-    }else{
-      return "";
-  }
-  }
+  value_se = value_se.split(",")
+  // value_se[2] += (2 + statements_faca.split('\n').length)
+  // TODO: Assemble JavaScript into code variable.
+  var code = `${value_se.join('\n')}\n${statements_faca}FN$\n`;
+  return code;
 };
 
-Blockly.JavaScript['block_loop'] = function(block) {
-  var value_cond = Blockly.JavaScript.valueToCode(block, 'cond', Blockly.JavaScript.ORDER_ATOMIC);
-  var statements_name = Blockly.JavaScript.statementToCode(block, 'NAME');
 
-  comands = value_cond.split(",")
-
-    if(comands[1]== "EQ"){
-     if(parseFloat(comands[0])== parseFloat(comands[2])){
-         window.androidObj.textToAndroid((statements_name.trim().toString()+"\n"));
-     }else{
-       break;
-    }
-    }else if(comands[1]=="NE"){
-     if(parseFloat(comands[0])!= parseFloat(comands[2])){
-       window.androidObj.textToAndroid((statements_name.trim().toString()+"\n"));
-     }else{
-         break;
-     }
-    }else if(comands[1]=="LOW"){
-     if(parseFloat(comands[0])< parseFloat(comands[2])){
-       window.androidObj.textToAndroid((statements_name.trim().toString()+"\n"));
-     }else{
-      break;
-    }
-    }else if(comands[1]=="LOWEQ"){
-     if(parseFloat(comands[0])<= parseFloat(comands[2])){
-       window.androidObj.textToAndroid((statements_name.trim().toString()+"\n"));
-     }else{
-       break;
-    }
-    }else if(comands[1]=="BIG"){
-     if(parseFloat(comands[0]) > parseFloat(comands[2])){
-       window.androidObj.textToAndroid((statements_name.trim().toString()+"\n"));
-     }else{
-       break;
-    }
-    }else if(comands[1]=="BIGEQ"){
-     if(parseFloat(comands[0])>= parseFloat(comands[2])){
-       window.androidObj.textToAndroid((statements_name.trim().toString()+"\n"));
-     }else{
-       break;
-    }
-    }
-
-};
-
-Blockly.JavaScript['block_if_else'] = function(block) {
+Blockly.JavaScript['block_if_else'] = function (block) {
   var value_se = Blockly.JavaScript.valueToCode(block, 'se', Blockly.JavaScript.ORDER_ATOMIC);
   var statements_faca1 = Blockly.JavaScript.statementToCode(block, 'faca1');
   var statements_faca2 = Blockly.JavaScript.statementToCode(block, 'faca2');
-  
-  comands = value_se.split(",")
+  value_se = value_se.split(",")
+  // selength = (2 + statements_faca1.split('\n').length)
+  // value_se[2] += selength
 
-  if(comands[1]== "EQ"){
-    if(parseFloat(comands[0])== parseFloat(comands[2])){
-      return statements_faca1.trim()+"\n"
-    }else{
-      return statements_faca2.trim()+"\n"
-    }
-  }else if(comands[1]=="NE"){
-    if(parseFloat(comands[0])!= parseFloat(comands[2])){
-      return statements_faca1.trim()+"\n"
-      }else{
-        return statements_faca2.trim()+"\n"
-      }
-  }else if(comands[1]=="LOW"){
-    if(parseFloat(comands[0])< parseFloat(comands[2])){
-      return statements_faca1.trim()+"\n"
-    }else{
-        return statements_faca2.trim()+"\n"
-    }
-  }else if(comands[1]=="LOWEQ"){
-    if(parseFloat(comands[0])<= parseFloat(comands[2])){
-      return statements_faca1.trim()+"\n"
-    }else{
-        return statements_faca2.trim()+"\n"
-    }
-  }else if(comands[1]=="BIG"){
-    if(parseFloat(comands[0]) > parseFloat(comands[2])){
-      return statements_faca1.trim()+"\n"
-    }else{
-      return statements_faca2.trim()+"\n"
-    }
-  }else if(comands[1]=="BIGEQ"){
-    if(parseFloat(comands[0])>= parseFloat(comands[2])){
-      return statements_faca1.trim()+"\n"
-    }else{
-      return statements_faca2.trim()+"\n"
-    }
-  }
+  // TODO: Assemble JavaScript into code variable.
+  var code = `${value_se.join('\n')}\n${statements_faca1}JM$\nFE$\n${statements_faca2}FN$\n`;
+  return code;
+  return code;
 };
 
-Blockly.JavaScript['block_cond'] = function(block) {
-  var value_cond1 = Blockly.JavaScript.valueToCode(block, 'cond1', Blockly.JavaScript.ORDER_NONE);
+// Blockly.JavaScript['block_if_else'] = function(block) {
+//   var value_se = Blockly.JavaScript.valueToCode(block, 'se', Blockly.JavaScript.ORDER_ATOMIC);
+//   var statements_faca1 = Blockly.JavaScript.statementToCode(block, 'faca1');
+//   var value_senao = Blockly.JavaScript.valueToCode(block, 'senao', Blockly.JavaScript.ORDER_ATOMIC);
+//   var statements_faca2 = Blockly.JavaScript.statementToCode(block, 'faca2');
+//   value_se = value_se.split(",")
+//   // selength = (2 + statements_faca1.split('\n').length)
+//   // value_se[2] += selength
+
+//   value_senao = value_senao.split(",")
+//   // value_senao[2] += (selength + 2 + statements_faca2.split('\n').length)
+//   // TODO: Assemble JavaScript into code variable.
+//   var code = `${value_se.join('\n')}\n${statements_faca1}${value_senao.join('\n')}\n${statements_faca2}`;
+//   return code;
+// };
+
+Blockly.JavaScript['block_cond'] = function (block) {
+  var value_cond1 = Blockly.JavaScript.valueToCode(block, 'cond1', Blockly.JavaScript.ORDER_NONE).replace("\n", "").replace(/(\(|\))/g, '')
   var dropdown_comp = block.getFieldValue('comp');
-  var value_cond2 = Blockly.JavaScript.valueToCode(block, 'cond2', Blockly.JavaScript.ORDER_ATOMIC);
-  var load_cond1 = "";
-  if(isNaN(parseInt(value_cond1))){
-    load_cond1 = value_cond1.replace("\n", "");
-  }else{
-    load_cond1 = `${value_cond1}`;
+  var value_cond2 = Blockly.JavaScript.valueToCode(block, 'cond2', Blockly.JavaScript.ORDER_ATOMIC).replace("\n", "").replace(/(\(|\))/g, '')
+  let inverted = false
+  let variable = false
+
+  if (isNaN(parseInt(value_cond1)) && value_cond1 != '') {
+    value_cond1 = value_cond1
+    variable = true
+  } else {
+    value_cond1 = "LO$" + value_cond1
+  }
+  if (/(gu|gd|gl|gt)/gi.test(value_cond2)) {
+    let aux = value_cond1
+    value_cond1 = value_cond2
+    value_cond2 = aux
+    inverted = true
+    variable = true
+  } else if (isNaN(parseInt(value_cond2)) && value_cond2 != '') {
+    value_cond2 = value_cond2
+    variable = true
+  } else {
+    value_cond2 = value_cond2
+    variable = false
   }
 
   var opcode = "";
-  if(dropdown_comp == 'EQ'){
-    opcode = "EQ";
-  }else if(dropdown_comp == 'DIF'){
-    opcode = "NE";
-  }else if(dropdown_comp == 'LS'){
-    opcode = "LOW";
-  }else if(dropdown_comp == 'LE'){
-    opcode = "LOWEQ";
-  }else if(dropdown_comp == 'GT'){
-    opcode = "BIG";
-  }else if(dropdown_comp == 'GE'){
-    opcode = "BIGEQ";
+  if (dropdown_comp == 'EQ') {
+    opcode = !inverted ? "NE" : "NE";
+  } else if (dropdown_comp == 'DIF') {
+    opcode = !inverted ? "JE" : "JE";
+  } else if (dropdown_comp == 'LS') {
+    opcode = !inverted ? "GE" : "JL";
+  } else if (dropdown_comp == 'LE') {
+    opcode = !inverted ? "JG" : "LE";
+  } else if (dropdown_comp == 'GT') {
+    opcode = !inverted ? "LE" : "GE";
+  } else if (dropdown_comp == 'GE') {
+    opcode = !inverted ? "JL" : "GE";
   }
   // TODO: Assemble JavaScript into code variable.
-  var code = [load_cond1,`${opcode}`,`${value_cond2}`]
+  var code = [value_cond1, (variable ? 'CM$' : 'CM') + value_cond2, `${opcode}`]
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript['block_math'] = function(block) {
+Blockly.JavaScript['block_math'] = function (block) {
   var value_math1 = Blockly.JavaScript.valueToCode(block, 'math1', Blockly.JavaScript.ORDER_NONE);
   var dropdown_op = block.getFieldValue('op');
   var value_math2 = Blockly.JavaScript.valueToCode(block, 'math2', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
   var opcode = "";
   var load_math1 = "";
-  if(isNaN(parseInt(value_math1))){
+  if (isNaN(parseInt(value_math1))) {
     load_math1 = value_math1.replace("\n", "");
-  }else{
-    load_math1 = `${value_math1}`;
+  } else {
+    load_math1 = `LO${value_math1}`;
   }
-  var code = "";
-  if(dropdown_op == 'PS'){
-    code = parseInt(load_math1)+parseInt(value_math2);
-  }else if(dropdown_op == 'MI'){
-    code = parseInt(load_math1)-parseInt(value_math2);
-  }else if(dropdown_op == 'ML'){
-    code = parseInt(load_math1)*parseInt(value_math2);
-  }else if(dropdown_op == 'DI'){
-    code = parseInt(load_math1)/parseInt(value_math2);
+  if (dropdown_op == 'PS') {
+    opcode = "AD";
+  } else if (dropdown_op == 'MI') {
+    opcode = "SU";
+  } else if (dropdown_op == 'ML') {
+    opcode = "MU";
+  } else if (dropdown_op == 'DI') {
+    opcode = "DI";
   }
+  var code = `${load_math1}\n${opcode}${value_math2}\n`;
   // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+  return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
+Blockly.JavaScript['block_loop'] = function (block) {
+  var value_cond = Blockly.JavaScript.valueToCode(block, 'cond', Blockly.JavaScript.ORDER_ATOMIC);
+  var statements_name = Blockly.JavaScript.statementToCode(block, 'NAME');
+  // TODO: Assemble JavaScript into code variable.
+  value_cond = value_cond.split(",")
+  // value_se[2] += (2 + statements_faca.split('\n').length)
+  // TODO: Assemble JavaScript into code variable.
+  var code = `${value_cond.join('\n')}\n${statements_name}JM$\nFN$\n`;
+  return code;
+};
