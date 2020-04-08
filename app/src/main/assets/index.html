@@ -139,10 +139,14 @@
       }
       codigo = arr.map((item, index) => item.replace(/(?<=^..)(.*)/g, item => item.padStart(4, "0"))).join(";") + ";HT0000;$"
       console.log(codigo.toString())
+      // mandando o codigo pro arduino
       window.androidObj.textToAndroid(codigo);
+      //mostrando o codigo na tela do cel
       alert(codigo)
     }
     </script>
 </body>
 
 </html>
+
+
